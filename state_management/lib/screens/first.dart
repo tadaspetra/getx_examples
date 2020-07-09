@@ -15,28 +15,40 @@ class First extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            GetBuilder<CountController>(
+              init: CountController(),
+              // You can initialize your controller here the first time. Don't use init in your other GetBuilders of same controller
+              // GetX/Obx is reactive (streams) while GetBuilder only rebuilds on update()
+              builder: (s) => Text(
+                'Current Count Value: ${s.count}',
+              ),
+            ),
+            SizedBox(
+              height: 40,
+            ),
             GetX<UserController>(
-              init: UserController(),
+              init:
+                  UserController(), // can initialize inside GetX instead of .put
               builder: (_) => Text('Name: ${_.user.value.name}'),
             ),
             Obx(
-              () => Text('Age: ${Get.find<UserController>().user.value.age}'),
+              //Obx is very similar to GetX except 'lighter' so no parameters for init, dispose, etc
+              () => Text(
+                  'Stored Count: ${Get.find<UserController>().user.value.count}'),
+            ),
+            SizedBox(
+              height: 20,
             ),
             RaisedButton(
-              child: Text("Update name"),
+              child: Text("Update Name & Stored Count"),
               onPressed: () {
-                Get.find<UserController>().updateUser();
+                Get.find<UserController>().updateUser(Get.find<
+                        CountController>()
+                    .count); //using Get.find locates the controller that was created in 'init' in GetX
               },
             ),
             SizedBox(
               height: 100,
-            ),
-            GetBuilder<CountController>(
-              init: CountController(),
-              // You can initialize your controller here the first time. Don't use init in your other GetBuilders of same controller
-              builder: (s) => Text(
-                'clicks: ${s.count}',
-              ),
             ),
             RaisedButton(
               child: Text('Next Screen'),

@@ -6,6 +6,7 @@ import 'package:reference/screens/first.dart';
 void main() {
   runApp(
     GetMaterialApp(
+      //don't need 'Get' before Material App if you're only using State Management
       home: First(),
     ),
   );

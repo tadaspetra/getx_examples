@@ -4,6 +4,12 @@ class SumController extends GetxController {
   final count1 = 0.obs;
   final count2 = 0.obs;
 
+  int get sum => count1.value + count2.value;
+
+  increment() => count1.value++;
+
+  increment2() => count2.value++;
+
   /// Once the controller has entered memory, onInit will be called.
   /// It is preferable to use onInit instead of class constructors or initState method.
   /// Use onInit to trigger initial events like API searches, listeners registration
@@ -19,16 +25,10 @@ class SumController extends GetxController {
     /// Called first time the variable $_ is changed
     once(count1, (_) => print("$_ was changed once"));
 
-    /// Anti DDos - Called every time the user stops typing for 1 second, for example.
+    /// Called once there has been no action on observable for 1 second
     debounce(count1, (_) => print("debouce$_"), time: Duration(seconds: 1));
 
-    /// Ignore all changes within 1 second.
+    /// Only reads the observable every 1 second
     interval(count1, (_) => print("interval $_"), time: Duration(seconds: 1));
   }
-
-  int get sum => count1.value + count2.value;
-
-  increment() => count1.value++;
-
-  increment2() => count2.value++;
 }

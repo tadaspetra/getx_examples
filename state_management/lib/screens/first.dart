@@ -5,18 +5,18 @@ import 'package:reference/controllers/userController.dart';
 import 'package:reference/screens/second.dart';
 
 class First extends StatelessWidget {
+  final CountController countController = Get.put(CountController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Get State Management"),
+        title: Text("GetX | State Management"),
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             GetBuilder<CountController>(
-              init: CountController(),
               // You can initialize your controller here the first time. Don't use init in your other GetBuilders of same controller
               // GetX/Obx is reactive (streams) while GetBuilder only rebuilds on update()
               builder: (s) => Text(

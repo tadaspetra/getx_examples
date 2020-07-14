@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:reference/controllers/sumController.dart';
 
 class Second extends StatelessWidget {
-  final SumController sumController = Get.put(SumController());
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Second Page'),
+        title: Text('second Route'),
       ),
       body: Center(
         child: Column(
@@ -50,13 +49,40 @@ class Second extends StatelessWidget {
             RaisedButton(
               child: Text("Increment Counter #1"),
               onPressed: () {
-                sumController.increment();
+                Get.find<SumController>().increment();
               },
             ),
             RaisedButton(
               child: Text("Increment Counter #2"),
               onPressed: () {
-                sumController.increment2();
+                Get.find<SumController>().increment2();
+              },
+            ),
+            RaisedButton(
+              child: Text("Store Values"),
+              onPressed: () {
+                GetStorage box = GetStorage();
+                box.write("count1", Get.find<SumController>().count1.value);
+                box.write("count2", Get.find<SumController>().count2.value);
+              },
+            ),
+            SizedBox(
+              height: 40,
+            ),
+            RaisedButton(
+              child: Text("Change Theme"),
+              onPressed: () {
+                if (Get.isDarkMode) {
+                  Get.changeTheme(ThemeData.light());
+                } else {
+                  Get.changeTheme(ThemeData.dark());
+                }
+
+                print("Screen Height: " + Get.height.toString());
+                print("Screen Width: " + Get.width.toString());
+                print("Is Device IOS?: " + GetPlatform.isIOS.toString());
+                print(
+                    "Is Device Android?: " + GetPlatform.isAndroid.toString());
               },
             ),
           ],

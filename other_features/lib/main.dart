@@ -12,6 +12,10 @@ void main() async {
   runApp(GetMaterialApp(
     // It is not mandatory to use named routes, but dynamic urls are interesting.
     initialRoute: '/first',
+    theme: ThemeData(
+      accentColor: Colors.purpleAccent,
+      primaryColor: Colors.purple,
+    ),
     defaultTransition: Transition.upToDown,
     translations: MyTranslations(),
     locale: Locale('en', 'US'),

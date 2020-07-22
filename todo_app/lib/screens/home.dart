@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:get/state_manager.dart';
 import 'package:todo_app/controllers/authController.dart';
 
-class Home extends StatelessWidget {
+class Home extends GetWidget<AuthController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -13,7 +13,7 @@ class Home extends StatelessWidget {
         child: RaisedButton(
           child: Text("Sign Out"),
           onPressed: () {
-            Get.find<AuthController>().signOut();
+            controller.signOut();
           },
         ),
       ),

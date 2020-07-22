@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
+import 'package:todo_app/utils/root.dart';
 
 class AuthController extends GetxController {
   FirebaseAuth _auth = FirebaseAuth.instance;
@@ -16,6 +17,7 @@ class AuthController extends GetxController {
     try {
       await _auth.createUserWithEmailAndPassword(
           email: email.trim(), password: password);
+      Get.back();
     } catch (e) {
       Get.snackbar(
         "Error creating Account",

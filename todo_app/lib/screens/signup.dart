@@ -3,6 +3,7 @@ import 'package:get/state_manager.dart';
 import 'package:todo_app/controllers/authController.dart';
 
 class SignUp extends GetWidget<AuthController> {
+  final TextEditingController nameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
@@ -19,6 +20,13 @@ class SignUp extends GetWidget<AuthController> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               TextFormField(
+                decoration: InputDecoration(hintText: "Full Name"),
+                controller: nameController,
+              ),
+              SizedBox(
+                height: 40,
+              ),
+              TextFormField(
                 decoration: InputDecoration(hintText: "Email"),
                 controller: emailController,
               ),
@@ -33,7 +41,7 @@ class SignUp extends GetWidget<AuthController> {
               FlatButton(
                 child: Text("Sign Up"),
                 onPressed: () {
-                  controller.createUser(
+                  controller.createUser(nameController.text,
                       emailController.text, passwordController.text);
                 },
               )

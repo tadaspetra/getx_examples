@@ -13,6 +13,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       initialBinding: AuthBinding(),
       home: Root(),
+      theme: ThemeData.dark(),
     );
   }
 }

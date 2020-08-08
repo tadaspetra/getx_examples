@@ -6,7 +6,7 @@ class TodoCard extends StatelessWidget {
   final String uid;
   final TodoModel todo;
 
-  const TodoCard({Key key, this.todo, this.uid}) : super(key: key);
+  const TodoCard({Key key, this.uid, this.todo}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -19,14 +19,18 @@ class TodoCard extends StatelessWidget {
             Expanded(
               child: Text(
                 todo.content,
-                style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                style: TextStyle(
+                  fontSize: 15,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
             Checkbox(
               value: todo.done,
-              onChanged: (bool newValue) =>
-                  Database().updateTodoDone(newValue, uid, todo.todoId),
-            )
+              onChanged: (newValue) {
+                Database().updateTodo(newValue, uid, todo.todoId);
+              },
+            ),
           ],
         ),
       ),

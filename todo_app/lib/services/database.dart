@@ -47,7 +47,7 @@ class Database {
     }
   }
 
-  Stream<List<TodoModel>> getTodos(String uid) {
+  Stream<List<TodoModel>> todoStream(String uid) {
     return _firestore
         .collection("users")
         .document(uid)
@@ -63,16 +63,14 @@ class Database {
     });
   }
 
-  Future<void> updateTodoDone(bool newValue, String uid, String todoId) async {
+  Future<void> updateTodo(bool newValue, String uid, String todoId) async {
     try {
       _firestore
           .collection("users")
           .document(uid)
           .collection("todos")
           .document(todoId)
-          .updateData({
-        'done': newValue,
-      });
+          .updateData({"done": newValue});
     } catch (e) {
       print(e);
       rethrow;

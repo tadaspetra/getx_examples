@@ -1,21 +1,18 @@
 import 'package:get/get.dart';
 import 'package:todo_app/controllers/authController.dart';
+import 'package:todo_app/controllers/bindings/authBinding.dart';
 import 'package:todo_app/models/todo.dart';
 import 'package:todo_app/services/database.dart';
 
 class TodoController extends GetxController {
-  //stream todos from firestore
-  Rx<List<TodoModel>> _todoStream = Rx<List<TodoModel>>();
+  Rx<List<TodoModel>> todoList = Rx<List<TodoModel>>();
 
-  List<TodoModel> get todos => _todoStream.value;
+  List<TodoModel> get todos => todoList.value;
 
   @override
-  onInit() {
+  void onInit() {
     String uid = Get.find<AuthController>().user.uid;
-    _todoStream.bindStream(
-      Database().getTodos(
-        uid,
-      ),
-    );
+    todoList
+        .bindStream(Database().todoStream(uid)); //stream coming from firebase
   }
 }

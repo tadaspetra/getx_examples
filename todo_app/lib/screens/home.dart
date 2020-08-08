@@ -96,19 +96,19 @@ class Home extends GetWidget<AuthController> {
               if (todoController != null && todoController.todos != null) {
                 return Expanded(
                   child: ListView.builder(
-                      itemCount: todoController.todos.length,
-                      itemBuilder: (_, index) {
-                        return TodoCard(
-                          todo: todoController.todos[index],
+                    itemCount: todoController.todos.length,
+                    itemBuilder: (_, index) {
+                      return TodoCard(
                           uid: controller.user.uid,
-                        );
-                      }),
+                          todo: todoController.todos[index]);
+                    },
+                  ),
                 );
               } else {
                 return Text("loading...");
               }
             },
-          ),
+          )
         ],
       ),
     );
